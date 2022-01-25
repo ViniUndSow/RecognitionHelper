@@ -17,11 +17,13 @@ class FilePaths {
         // FOLDER PATHS
         val NEGATIVE_IMAGES_DIRECTORY: Path = Path.of("src/main/resources/negative")
         val POSITIVE_IMAGES_DIRECTORY: Path = Path.of("src/main/resources/positive")
+        val IMAGE_SOURCE_DIRECTORY: Path = Path.of("src/main/resources/imageRepository/images/")
 
         // Files that contain a list of images which for creating an valid file.
         val NEGATIVE_IMAGES_OUTPUT_FILE: Path = Path.of("src/main/resources/negative.txt")
         val POSITIVE_IMAGES_OUTPUT_FILE: Path = Path.of("src/main/resources/positive.txt")
 
+        // Result cascade folder
         val RESULT_CASCADE_DIRECTORY: Path = Path.of("src/main/resources/cascade")
 
         fun createDirectory(path: Path) {

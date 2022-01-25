@@ -1,5 +1,9 @@
 package vpr.voad.recognitionHelper
 
+import org.slf4j.LoggerFactory
+import vpr.voad.recognitionHelper.util.FilePaths
+import java.util.logging.Logger
+
 /*
     This is the 2. Step.
  */
@@ -11,5 +15,17 @@ package vpr.voad.recognitionHelper
  */
 fun main() {
 
+    val targetCardId = "17588"
 
+    val logger = LoggerFactory.getLogger("Step 2")
+    val allCardFolders = FilePaths.IMAGE_SOURCE_DIRECTORY.toFile().listFiles()
+
+    val targetCardFolder = allCardFolders.find {
+        it.name.equals(targetCardId)
+    }
+
+    val allOtherCardFolders = allCardFolders.filterNot { it.name.equals(targetCardId) }
+
+
+    // Datein in die Zielordner kopieren, anschliesend die Zielordner clearen.
 }
