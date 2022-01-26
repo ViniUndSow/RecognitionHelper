@@ -7,12 +7,12 @@ import kotlin.io.path.createFile
 import kotlin.io.path.exists
 import vpr.voad.recognitionHelper.util.enums.FileFolderType
 import vpr.voad.recognitionHelper.util.enums.PositiveNegativeType
+import java.nio.file.Paths
 
 class FilePaths {
 
     companion object {
 
-        private val logger = LoggerFactory.getLogger(javaClass)
 
         // FOLDER PATHS
         val NEGATIVE_IMAGES_DIRECTORY: Path = Path.of("src/main/resources/negative")
@@ -25,6 +25,9 @@ class FilePaths {
 
         // Result cascade folder
         val RESULT_CASCADE_DIRECTORY: Path = Path.of("src/main/resources/cascade")
+
+
+        private val logger = LoggerFactory.getLogger(javaClass)
 
         fun createDirectory(path: Path) {
             createDirectoryOrFileIfNotExisting(path = path, type = FileFolderType.DIRECTORY)
@@ -62,7 +65,6 @@ class FilePaths {
             }
             NEGATIVE_IMAGES_OUTPUT_FILE.toFile().writeText(targetString)
         }
-
     }
 
 
