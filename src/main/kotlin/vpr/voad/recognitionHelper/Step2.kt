@@ -3,6 +3,7 @@ package vpr.voad.recognitionHelper
 import org.slf4j.LoggerFactory
 import vpr.voad.recognitionHelper.util.FilePaths
 import java.util.logging.Logger
+import kotlin.io.path.pathString
 
 /*
     This is the 2. Step.
@@ -15,17 +16,37 @@ import java.util.logging.Logger
  */
 fun main() {
 
-    val targetCardId = "17588"
+    val targetCardId = "40044918"
 
     val logger = LoggerFactory.getLogger("Step 2")
     val allCardFolders = FilePaths.IMAGE_SOURCE_DIRECTORY.toFile().listFiles()
 
+    // gets all card images from one ID
     val targetCardFolder = allCardFolders.find {
         it.name.equals(targetCardId)
     }
 
-    val allOtherCardFolders = allCardFolders.filterNot { it.name.equals(targetCardId) }
+    // gets the rest of folders with the card ids no equal to the id
+    val allOtherCardFolders = allCardFolders.filterNot { it.name.equals(targetCardId)}.filter { it.name.substringAfterLast("\\").contains(Regex("[0-9]")) }
+    println(targetCardFolder)
 
 
-    // Datein in die Zielordner kopieren, anschliesend die Zielordner clearen.
+    // Copys all files into the right folders.
+
+    targetCardFolder!!.listFiles().forEach {
+        it.copyTo(
+                target = FilePaths.POSITIVE_IMAGES_DIRECTORY.resolve(it.name).toFile(),
+                overwrite = true
+        )
+    }
+
+    allOtherCardFolders.forEach { allFolders ->
+        allFolders.listFiles().forEach { images ->
+            images.copyTo(
+                    target = FilePaths.NEGATIVE_IMAGES_DIRECTORY.resolve("${allFolders.name}_${images.name}").toFile(),
+                    overwrite = true
+            )
+        }
+    }
+
 }

@@ -17,7 +17,7 @@ class FilePaths {
         // FOLDER PATHS
         val NEGATIVE_IMAGES_DIRECTORY: Path = Path.of("src/main/resources/negative")
         val POSITIVE_IMAGES_DIRECTORY: Path = Path.of("src/main/resources/positive")
-        val IMAGE_SOURCE_DIRECTORY: Path = Path.of("src/main/resources/imageRepository/images/")
+        val IMAGE_SOURCE_DIRECTORY: Path = Path.of("D:\\Programmierung\\YugiohCardImageRepository")
 
         // Files that contain a list of images which for creating an valid file.
         val NEGATIVE_IMAGES_OUTPUT_FILE: Path = Path.of("src/main/resources/negative.txt")
