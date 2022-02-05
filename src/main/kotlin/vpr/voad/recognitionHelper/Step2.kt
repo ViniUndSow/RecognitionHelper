@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory
 import vpr.voad.recognitionHelper.util.FilePaths
 import java.util.logging.Logger
 import kotlin.io.path.pathString
+import kotlin.io.path.writeText
 
 /*
     This is the 2. Step.
@@ -35,18 +36,23 @@ fun main() {
 
     targetCardFolder!!.listFiles().forEach {
         it.copyTo(
-                target = FilePaths.POSITIVE_IMAGES_DIRECTORY.resolve(it.name).toFile(),
+                target = FilePaths.POSITIVE_IMAGES_DIRECTORY.resolve(it.name.replaceAfter(".","jpg")).toFile(),
                 overwrite = true
         )
     }
 
+
+    var negativeFileString = ""
     allOtherCardFolders.forEach { allFolders ->
         allFolders.listFiles().forEach { images ->
+            val targetFile = FilePaths.NEGATIVE_IMAGES_DIRECTORY.resolve("${allFolders.name}_${images.name.replaceAfter(".","jpg")}").toFile()
             images.copyTo(
-                    target = FilePaths.NEGATIVE_IMAGES_DIRECTORY.resolve("${allFolders.name}_${images.name}").toFile(),
+                    target = targetFile,
                     overwrite = true
             )
+            negativeFileString += "negative/${targetFile.name}\n"
         }
     }
 
+    FilePaths.NEGATIVE_IMAGES_OUTPUT_FILE.writeText(negativeFileString)
 }

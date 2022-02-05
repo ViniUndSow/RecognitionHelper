@@ -9,7 +9,5 @@ import vpr.voad.recognitionHelper.util.FilePaths
  */
 fun main() {
     val positiveFile = FilePaths.POSITIVE_IMAGES_OUTPUT_FILE.toFile()
-    val positiveFileContent = positiveFile.readText()
-    positiveFileContent.replace("\\", "/")
-    positiveFile.writeText(positiveFileContent)
+    positiveFile.writeText(positiveFile.readText().replace("\\", "/"))
 }
